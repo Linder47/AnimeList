@@ -1,10 +1,14 @@
 import {combineReducers} from 'redux';
-import { animeListReducer } from './animeListReducer';
+import { topAnimeListReducer } from './topAnimeListReducer';
+import { searchedAnimeListReducer } from './searchedAnimeList';
 import { userReducer } from './userReducer';
+import { animeReducer } from './animeReducer';
 
 export const rootReducer = combineReducers({
     user: userReducer,
-    animeList: animeListReducer,
+    topAnimeList: topAnimeListReducer,
+    searchedAnimeList: searchedAnimeListReducer,
+    anime: animeReducer,
 })
 
 export type RootState = ReturnType<typeof rootReducer>; 

@@ -1,5 +1,5 @@
 export interface AnimeListState {
-    animeList: any[];
+    topAnimeList: any[];
     loading: boolean;
     error: null | string;
 }
@@ -24,4 +24,4 @@ interface FetchAnimeListError {
     payload: string;
 }
 
-export type AnimeListType = FetchAnimeList | FetchAnimeListSuccess | FetchAnimeListError;
+export type AnimeListAction = FetchAnimeList | FetchAnimeListSuccess | FetchAnimeListError;
