@@ -13,11 +13,12 @@ const options = {
   }
 };
 
-export const fetchTopAnimeList = () => {
+export const fetchTopAnimeList = (page = 1, limit = 10) => { //все равно сервер целиком отправляет, а не по странично
     return async (dispatch: Dispatch<AnimeListAction>) => {
         try {
             dispatch({type: AnimeListActionTypes.FETCH_ANIME_LIST })
-            const response = await axios.request({url: options.url, method: 'GET', headers: options.headers} )
+            const response = await axios.request({url: options.url, method: 'GET', headers: options.headers,
+            params: {page: page, limit: limit}} )
             dispatch({type: AnimeListActionTypes.FETCH_ANIME_LIST_SUCCESS , payload: response.data.top})
         } catch (e) {
             dispatch({type: AnimeListActionTypes.FETCH_ANIME_LIST_ERROR, payload: 'Ошибка при загрузке пользователей'})
@@ -25,7 +26,9 @@ export const fetchTopAnimeList = () => {
     }
 }
 
-
+export function setAnimeListPage(page: number): AnimeListAction {
+  return {type: AnimeListActionTypes.SET_ANIME_LIST_PAGE, payload: page}
+}
 
 //https://anilist.co/
 

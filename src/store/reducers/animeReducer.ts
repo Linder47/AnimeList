@@ -20,7 +20,8 @@ const initialState: AnimeState = {
 export const animeReducer = (state = initialState, action: AnimeAction): AnimeState => {
     switch (action.type) {
         case AnimeActionTypes.ADD_ANIME:
-            return { anime: action.payload.anime};
+            console.log('dva ' + action.payload.anime)
+            return { anime: action.payload.anime };
         default:
             return state;
     }

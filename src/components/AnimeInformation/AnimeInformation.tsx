@@ -5,7 +5,7 @@ import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { Image } from 'react-bootstrap';
 
 const AnimeInformation: React.FC = () => {
-    const { anime } = useTypedSelector(state => state.anime);
+    const { anime} = useTypedSelector(state => state.anime);
     
 
     console.log(anime);

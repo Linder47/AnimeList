@@ -3,7 +3,9 @@ import { AnimeListState, AnimeListAction, AnimeListActionTypes } from "../../typ
 const initialState: AnimeListState = {
     topAnimeList: [],
     loading: false,
-    error: null
+    error: null,
+    page: 1,
+    limit: 10
 }
 
 console.log('we re in a list block hmhmmhmhm');
@@ -11,11 +13,13 @@ console.log('we re in a list block hmhmmhmhm');
 export const topAnimeListReducer = (state = initialState, action: AnimeListAction): AnimeListState => {
     switch (action.type) {
         case AnimeListActionTypes.FETCH_ANIME_LIST:
-            return { topAnimeList: [], loading: true, error: null };
+            return { ...state, loading: true };
         case AnimeListActionTypes.FETCH_ANIME_LIST_SUCCESS:
-            return { topAnimeList: action.payload, loading: false, error: null };
+            return { ...state, topAnimeList: action.payload, loading: false };
         case AnimeListActionTypes.FETCH_ANIME_LIST_ERROR:
-            return { topAnimeList: [], loading: false, error: action.payload };
+            return { ...state, loading: false, error: action.payload };
+            case AnimeListActionTypes.SET_ANIME_LIST_PAGE:
+            return {...state, loading: false, page: action.payload}
 
         default:
             return state;
