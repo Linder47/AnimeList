@@ -5,10 +5,10 @@ Small application that allows you to search anime and its information such as sy
 
 Build with:
 
-- React
+- React (+React Hooks)
 - Redux (+thunk)
 - TypeScript
-- React Router
+- React Router (+Router Hooks)
 - React Bootsrtap
 
 API:

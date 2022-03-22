@@ -1,43 +1,52 @@
 import React, { useEffect } from 'react';
+// import  useHistory  from "react-router-dom";
 import { useActions } from '../../hooks/useActions';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
-import { NavLink } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { AnimeState } from '../../types/anime';
 
 const SearchedAnime: React.FC = () => {
     const { animeList, loading, error, page, limit } = useTypedSelector(state => state.searchedAnimeList);
     const { addAnimeInfo, setSearchedAnimePage, fetchSearchedAnimeList } = useActions();
-    const pages = [1, 2, 3, 4, 5]
+    const navigate = useNavigate();
+    // const pages = [1, 2, 3, 4, 5]
 
-    const addAnimeInformationToTheStore = (event: React.MouseEvent<HTMLDivElement>, anime: AnimeState) => {
-        event.preventDefault();
-        console.log(anime);
-        addAnimeInfo(anime);
-    }
+    const addAnimeInformationToTheStore = (event: React.MouseEvent<HTMLDivElement>, anime: AnimeState, title: string) => {
 
-    const changePages = (p: number) => {
-        console.log('ну посмотрим ядрен батон. page ' + p);
-        setSearchedAnimePage(p)
-        fetchSearchedAnimeList('naruto', p)
-    };
+    event.preventDefault();
+    console.log(title);
+    console.log(anime);
+    // console.log(ani.score);
+    // console.log('ДАРОВА' + ani.mal_id);
+    // // console.log(anime.anime);
+    addAnimeInfo(anime);
+    navigate('animeTitle/' + title);
+}
 
-    console.log(animeList);
+// const changePages = (p: number) => {
+//     console.log('ну посмотрим ядрен батон. page ' + p);
+//     setSearchedAnimePage(p)
+//     fetchSearchedAnimeList('naruto', p)
+// };
 
-    // useEffect(() => {
-    //     fetchSearchedAnimeList(, page, limit)
-    // }, [page])
+console.log(animeList);
 
-    if (loading) {
-        return <p>Loading searched anime</p>
-    }
+// useEffect(() => {
+//     fetchSearchedAnimeList(, page, limit)
+// }, [page])
 
-    if (error) {
-        return <p>Искомое аниме с ошибкой.</p>
-    }
+if (loading) {
+    return <p>Loading searched anime</p>
+}
 
-    return (
-        <div>
-            <div style={{ display: "flex" }}>
+if (error) {
+    return <p>Искомое аниме с ошибкой.</p>
+}
+
+return (
+    <div>
+        <Outlet />
+        {/* <div style={{ display: "flex" }}>
                 {pages.map(p =>
                     <div key={p}
                         onClick={() => changePages(p)}
@@ -46,18 +55,18 @@ const SearchedAnime: React.FC = () => {
                         {p}
                     </div>
                 )}
+            </div> */}
+
+        {animeList.map(ani =>
+            <div key={ani.mal_id} onClick={(e) => addAnimeInformationToTheStore(e, ani, ani.title)}>
+                {/* <NavLink to={`/anime=`} > */}
+                <img src={ani.image_url} alt="logo" />
+                {/* </NavLink> */}
             </div>
-            
-                {animeList.map(ani =>
-                    <div key={ani.mal_id} onClick={(e) => addAnimeInformationToTheStore(e, ani)}>
-                        <NavLink to={`/anime=`} >
-                            <img src={ani.image_url} alt="logo" />
-                        </NavLink>
-                    </div>
-                )}
-            
-        </div>
-    )
+        )}
+
+    </div>
+)
 }
 
 export default SearchedAnime;
