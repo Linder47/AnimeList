@@ -12,13 +12,11 @@ var options = {
         'x-rapidapi-key': xRapidapiKey
     }
 };
-//Проблема на серваке, при указании страницы >1 выдает рандомное аниме.
 
 export const fetchSearchedAnimeList = (title: string, page = 1, limit = 10) => {
     return async (dispatch: Dispatch<SearchedAnimeAction>) => {
         try {
             dispatch({ type: SearchedAnimeTypes.FETCH_SEARCHED_ANIME })
-            console.log('title ' + title + ' page ' + page + ' limit ' + limit);
             const response = await axios.request({
                 url: options.url, method: 'GET',
                 headers: options.headers, params: { q: title.toLowerCase(), limit: '24'} 
