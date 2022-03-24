@@ -1,14 +1,14 @@
 import axios from "axios"
 import { Dispatch } from "redux"
 import { AnimeListAction, AnimeListActionTypes } from "../../types/topAnimeList"
-//import { UserAction,UserActionTypes } from "../../types/user"
+import { xRapidapiHost, xRapidapiKey } from '../../apiKeys';
 
 const options = {
   method: 'GET',
   url: 'https://jikan1.p.rapidapi.com/top/anime/1/upcoming',
   headers: {
-    "x-rapidapi-host": 'jikan1.p.rapidapi.com',
-    "x-rapidapi-key": 'cb281bf8d5msh799df525a68bb13p11e752jsn7393e485ae25',
+    "x-rapidapi-host": xRapidapiHost,
+    "x-rapidapi-key": xRapidapiKey,
     "accept": "application/json"
   }
 };
