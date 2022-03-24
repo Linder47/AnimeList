@@ -14,14 +14,21 @@ const initialState: AnimeState = {
         url: "",
         rated: "",
         members: 0,
-    }
+    },
+    loading: false,
+    error: null
 }
 
 export const animeReducer = (state = initialState, action: AnimeAction): AnimeState => {
     switch (action.type) {
         case AnimeActionTypes.ADD_ANIME:
-            console.log('dva ' + action.payload.anime)
-            return { anime: action.payload.anime };
+            return { ...state, anime: action.payload.anime };
+        case AnimeActionTypes.FETCH_ANIME:
+            return { ...state, loading: true };
+        case AnimeActionTypes.FETCH_ANIME_SUCCESS:
+            return { ...state, loading: false, anime: action.payload.anime };
+        case AnimeActionTypes.FETCH_ANIME_ERROR:
+            return { ...state, loading: false, error: action.payload }
         default:
             return state;
     }

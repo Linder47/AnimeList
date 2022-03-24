@@ -6,16 +6,14 @@ import { NavLink, Outlet, useNavigate } from "react-router-dom";
 
 const Search: React.FC = () => {
     const [searchedAnime, setSearchedAnime] = useState('Search in English');
-    const { page, limit } = useTypedSelector(state => state.searchedAnimeList);
+    // const { page, limit } = useTypedSelector(state => state.searchedAnimeList);
     //const searchedAnime = useRef<null | string | HTMLParagraphElement>(null);
     const { fetchSearchedAnimeList } = useActions()
     const navigate = useNavigate();
-    const pages = [1, 2, 3, 4, 5]
+    // const pages = [1, 2, 3, 4, 5]
 
     const searchAnime = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log('SEARCH: fetchSearchedAnimeList(searchedAnime)');
-        console.log('SEARCH2: ' + searchedAnime + ' ' + page + ' ' + limit);
         navigate('animeList/' + searchedAnime);
         fetchSearchedAnimeList(searchedAnime, 1, 10);
     }

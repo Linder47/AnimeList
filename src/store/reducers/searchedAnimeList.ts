@@ -8,15 +8,13 @@ const initialState: SearchedAnimeListState = {
     limit: 10
 }
 
-console.log('we re in a fetch block yeah');
-
 export const searchedAnimeListReducer = (state = initialState, action: SearchedAnimeAction): SearchedAnimeListState => {
     switch (action.type) {
         case SearchedAnimeTypes.FETCH_SEARCHED_ANIME:
-            console.log('fetching');
+            // console.log('fetching');
             return { ...state, loading: true }
         case SearchedAnimeTypes.FETCH_SEARCHED_ANIME_SUCCESS:
-            console.log('got results! ' + action.payload);
+            // console.log('got results! ' + action.payload);
             return { ...state, loading: false, animeList: action.payload }
         case SearchedAnimeTypes.FETCH_SEARCHED_ANIME_ERROR:
             return { ...state, loading: false, error: action.payload }

@@ -3,6 +3,9 @@ import { InputGroup, FormControl, Form } from 'react-bootstrap';
 import { useActions } from "../../hooks/useActions";
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { Image } from 'react-bootstrap';
+import { useParams } from "react-router-dom";
+import { addAnimeInfo } from '../../store/action-creators/anime';
+import '../../App.css';
 
 const months: { [key: string]: string } = {
     0: 'Jan',
@@ -20,9 +23,17 @@ const months: { [key: string]: string } = {
 }
 
 const AnimeInformation: React.FC = () => {
-    const { anime } = useTypedSelector(state => state.anime);
+    const { anime, loading, error } = useTypedSelector(state => state.anime);
+    const params = useParams();
+    // const { addAnimeInfoFromURL } = useActions();
     console.log(anime.title);
     console.log('were inside anime information block! hurray!')
+
+    // if (anime.title.length === 0 && loading === false &&
+    //     error === null && params.animeID !== undefined) {
+    //     console.log(' МЫ В ПРОВЕРОЧКЕ АЛОООООООООООООООООООО');
+    //       addAnimeInfoFromURL(params.animeID);
+    // }
 
     const formattingDate = (date: string): string => {
         const dateArray = (date).slice(0, 10).split('-'); //year month day
@@ -40,17 +51,31 @@ const AnimeInformation: React.FC = () => {
 
     console.log('airing? ' + anime.airing);
 
+    if (loading) {
+        return <p>Ищем аниме эх</p>
+    }
+
+    if (error) {
+        return <p>Искомое аниме с ошибкой. {error}</p>
+    }
+
     return (
         <div className='anime-information'>
-            <Image src={anime.image_url} />
-            <h3>{anime.title}</h3>
-            <p>Episodes: {anime.episodes}</p>
-            <p>Content Rating: {anime.rated}</p>
-            <p> {`Aired: ${releaseDate} - ${finishedDate !== null ? finishedDate : ''}`} </p>
-            {/* <p>Release Date: {releaseDate}</p> */}
-            <p>Plot Synopsis: {anime.synopsis}</p>
-            <p>Episodes: {anime.episodes}</p>
-            <p>Ratings: {anime.score}</p>
+{/* <p className='design-element--block'>◌</p> */}
+            <h3 className='title--block'>{anime.title}</h3>
+            {/* <p className='design-element--block'>●</p> */}
+            <div className='anime-information--wrap'>
+                <div className='anime-information--image-block'>
+                    <Image src={anime.image_url} />
+                </div>
+                <div className='anime-information--text-block'>
+                    <p>Content Rating: {anime.rated}</p>
+                    <p> {`Aired: ${releaseDate} - ${finishedDate !== null ? finishedDate : ''}`} </p>
+                    <p>Plot Synopsis: {anime.synopsis}</p>
+                    <p>Episodes: {anime.episodes}</p>
+                    <p>Ratings: {anime.score}</p>
+                </div>
+            </div>
         </div>
 
     );

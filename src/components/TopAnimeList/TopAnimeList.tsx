@@ -4,7 +4,6 @@ import { useActions } from '../../hooks/useActions';
 
 const TopAnimeList: React.FC = () => {
     const { topAnimeList, error, loading, page, limit } = useTypedSelector(state => state.topAnimeList);
-
     const { fetchTopAnimeList, setAnimeListPage } = useActions()
     const pages = [1, 2, 3, 4, 5];
 

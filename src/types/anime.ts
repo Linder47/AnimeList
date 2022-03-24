@@ -12,16 +12,40 @@ export interface AnimeState {
         url: string;
         rated: string;
         members: number;
-    }
+    },
+    loading: boolean;
+    error: null | string;
 }
 
 export enum AnimeActionTypes {
-    ADD_ANIME = 'ADD_ANIME_INFORMATION'
+    ADD_ANIME = 'ADD_ANIME_INFORMATION',
+    FETCH_ANIME = 'FETCH_ANIME_INFORMATION',
+    FETCH_ANIME_SUCCESS = 'FETCH_ANIME_INFORMATION_SUCCESS',
+    FETCH_ANIME_ERROR = 'FETCH_ANIME_INFORMATION_ERROR',
 }
 
 interface Anime {
     type: AnimeActionTypes.ADD_ANIME;
-    payload: {[key: string]: any};
+    payload: { [key: string]: any };
+}
+
+interface FetchAnimeAction {
+    type: AnimeActionTypes.FETCH_ANIME;
+}
+
+interface FetchAnimeSuccessAction {
+    type: AnimeActionTypes.FETCH_ANIME_SUCCESS,
+    payload: any;
+}
+
+interface FetchAnimeErrorAction {
+    type: AnimeActionTypes.FETCH_ANIME_ERROR,
+    payload: string
+}
+
+export type AnimeAction = Anime | FetchAnimeAction | FetchAnimeSuccessAction | FetchAnimeErrorAction;
+
+
     //payload: Object;
 
     // anime: object;
@@ -36,6 +60,3 @@ interface Anime {
     // url: string;
     // rated: string;
     // members: number;
-}
-
-export type AnimeAction = Anime;

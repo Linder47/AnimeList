@@ -3,6 +3,7 @@ import Main from './pages/Main/Main';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import SearchedAnime from './components/SearchedAnime/SearchedAnime';
 import AnimeInformation from './components/AnimeInformation/AnimeInformation';
+import './App.css';
 
 const App = () => {
   return (
@@ -13,7 +14,7 @@ const App = () => {
           <Route path="/" element={<Main />} >
             {/* <Route index element={<Main />} /> */}
             <Route path="animeList/:nameOfAnimeList" element={<SearchedAnime />} >
-              <Route path="animeTitle/:nameOfAnimeTitle" element={<AnimeInformation />} />
+              <Route path="anime/:animeID" element={<AnimeInformation />} />
             </Route>
           </Route>
         </Routes>
