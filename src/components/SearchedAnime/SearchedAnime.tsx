@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-// import  useHistory  from "react-router-dom";
 import { useActions } from '../../hooks/useActions';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
-import { NavLink, Outlet, useNavigate, useParams } from "react-router-dom";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
 import { AnimeState } from '../../types/anime';
 import '../../App.css';
 
@@ -17,11 +16,12 @@ const sliceIntoChunks = (arr: any[], chunkSize: number): any[] => {
 
 const SearchedAnime: React.FC = () => {
     let { animeList, loading, error } = useTypedSelector(state => state.searchedAnimeList);
-    const { addAnimeInfo, setSearchedAnimePage, fetchSearchedAnimeList } = useActions();
+    const { addAnimeInfo, fetchSearchedAnimeList } = useActions();
+    const [page, setPage] = useState(1);
     const navigate = useNavigate();
     const params = useParams();
+
     let animeListChunks: any[] = [];
-    const [page, setPage] = useState(1);
     let showAnimeList: any[] = [];
     const pages = [1, 2, 3];
 
@@ -37,42 +37,39 @@ const SearchedAnime: React.FC = () => {
         window.scrollTo(0, 0)
     }
 
-    console.log(animeList);
-    console.log(animeList.length);
-
     if (animeList.length > 0) {
-        console.log(' а мы тут??')
         animeListChunks = sliceIntoChunks(animeList, 8);
         showAnimeList = animeListChunks[page - 1];
         console.log(animeListChunks);
     }
 
     const changePages = (p: number) => {
-        console.log('надо бы страничку поменять ' + p);
-        console.log(typeof p);
         setPage(p);
-        console.log(page);
     };
 
     useEffect(() => {
-        console.log('мы в юз эффекте???')
         showAnimeList = animeListChunks[page - 1];
     }, [page])
 
+    useEffect(() => {
+        setPage(1);
+    }, [animeList])
+
 
     if (loading) {
-        return <p>Loading searched anime</p>
+        return <div className='loading-error'><p>Loading searched anime...</p></div>
     }
 
     if (error) {
-        return <p>Искомое аниме с ошибкой.</p>
+        return <div className='loading-error'><p>Anime was not found :C</p></div>
     }
 
     return (
         <div >
             <Outlet />
+            <div className='searched-anime--wrap'></div>
             <h3 className='title--block'>Anime List</h3>
-            <div className='searched-anime--block' >
+            <div className='searched-anime--list' >
                 {showAnimeList.map(ani =>
                     <div key={ani.mal_id} onClick={(e) => addAnimeInformationToTheStore(e, ani, ani.mal_id)}>
                         <img src={ani.image_url} alt="logo" />
@@ -92,5 +89,3 @@ const SearchedAnime: React.FC = () => {
 }
 
 export default SearchedAnime;
-
-// style={{ border: p === page ? '2px solid green' : '1px solid gray', padding: 10 }

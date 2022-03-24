@@ -21,7 +21,7 @@ export const fetchSearchedAnimeList = (title: string, page = 1, limit = 10) => {
             console.log('title ' + title + ' page ' + page + ' limit ' + limit);
             const response = await axios.request({
                 url: options.url, method: 'GET',
-                headers: options.headers, params: { q: title.toLowerCase(), limit: '20'} //, page: page, limit: limit
+                headers: options.headers, params: { q: title.toLowerCase(), limit: '24'} //, page: page, limit: limit
             })
             dispatch({ type: SearchedAnimeTypes.FETCH_SEARCHED_ANIME_SUCCESS, payload: response.data.results })
         } catch (e) {

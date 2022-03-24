@@ -6,7 +6,7 @@ Small application that allows you to search anime and its information such as sy
 Build with:
 
 - React (+React Hooks)
-- Redux (+thunk)
+- Redux (+thunk, axios)
 - TypeScript
 - React Router (+Router Hooks)
 - React Bootsrtap

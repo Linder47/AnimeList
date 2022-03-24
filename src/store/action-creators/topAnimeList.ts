@@ -14,7 +14,7 @@ const options = {
 };
 
 export const fetchTopAnimeList = (page = 1, limit = 10) => { //все равно сервер целиком отправляет, а не по странично
-    return async (dispatch: Dispatch<AnimeListAction>) => {
+  return async (dispatch: Dispatch<AnimeListAction>) => {
         try {
             dispatch({type: AnimeListActionTypes.FETCH_ANIME_LIST })
             const response = await axios.request({url: options.url, method: 'GET', headers: options.headers,

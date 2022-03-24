@@ -10,9 +10,9 @@ background-color: #739FFF;
 
 
     background-color: #EEF3EC;
-    background-image: repeating-linear-gradient(135deg, #eef3ec, #efffce 10%, transparent 10%, transparent 50% ),
+    /* background-image: repeating-linear-gradient(135deg, #eef3ec, #efffce 10%, transparent 10%, transparent 50% ),
      repeating-linear-gradient(-135deg, #eef3ec, #eef3ec 10%, transparent 10%, transparent 50% );
-    background-size: 23px 42px;
+    background-size: 23px 42px; */
     /* #c4dbf6; */
 }
 
@@ -39,6 +39,17 @@ background-color: #739FFF;
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.loading-error {
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(4px);
+    background: linear-gradient(#eef3ec, #efffce, #eef3ec);
+    flex-direction: column;
+    height: 120px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -71,7 +82,7 @@ background-color: #739FFF;
   /* border-width: thick;
   border-style: solid; */
     margin-top: 40px;
-    margin-bottom: 40px;
+    /* margin-bottom: 40px; */
     /* border-right: #ffffff; */
     /* border-style: solid; */
     /* border-left: #ffffff;
@@ -93,6 +104,7 @@ background-color: #739FFF;
 .anime-information--image-block img{
   display: flex;
     height: 300px;
+    max-width: 250px;
 }
 
 .anime-information--text-block {
@@ -105,7 +117,7 @@ background-color: #739FFF;
     padding-right: 30px
 }
 
-.searched-anime--block {
+.searched-anime--list {
   display: flex;
   max-width: 960px;
   flex-direction: row;
@@ -118,9 +130,14 @@ background-color: #739FFF;
     height: 570px;
 }
 
-.searched-anime--block img {
+.searched-anime--list img {
   height: 250px;
   width: 175px;
+  cursor: pointer;
+}
+
+.searched-anime--wrap {
+  padding-top: 40px;
 }
 
 .anime-information--wrap {
@@ -142,7 +159,6 @@ background-color: #739FFF;
   height: 35px;
   display: flex;
   align-items: center;
-  /* border: 1px solid white; */
   background-color: #ffffff;
   width: 44px;
   cursor: pointer;
@@ -151,7 +167,20 @@ background-color: #739FFF;
 
 .page--active {
   background-color: #efffce;
-  /* border: 1px solid white; */
+}
+
+.not-found {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+    background: linear-gradient(#eef3ec, #efffce, #eef3ec);
+    flex-direction: column;
+    height: 100vh;
+    width: 100vh;
+}
+
+.not-found h4 {
+  font-size: 120px;
 }
 
 @keyframes App-logo-spin {

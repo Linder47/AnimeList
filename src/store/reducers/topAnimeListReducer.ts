@@ -8,8 +8,6 @@ const initialState: AnimeListState = {
     limit: 10
 }
 
-console.log('we re in a list block hmhmmhmhm');
-
 export const topAnimeListReducer = (state = initialState, action: AnimeListAction): AnimeListState => {
     switch (action.type) {
         case AnimeListActionTypes.FETCH_ANIME_LIST:
